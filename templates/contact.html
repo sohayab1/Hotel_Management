@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light gray */
+        }
+        header {
+            background-image: url('/static/image/contact.jpg'); /* Add your image URL here */
+            background-size: contain; /* Cover the entire header */
+            background-position: center;
+            background-color: #343a40; /* Dark gray */
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font size: 50px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .contact-box {
+            background-color: #fff; /* White */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow */
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .contact-box h2 {
+            color: #007bff; /* Blue */
+        }
+        .contact-box a {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .address {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .address i {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #007bff; /* Blue */
+        }
+        .instagram {
+            color: #C13584; /* Instagram pink */
+        }
+        .twitter {
+            color: #1DA1F2; /* Twitter blue */
+        }
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        
+        .footer-links a:hover {
+            color: #007bff;
+        }
+        /* Responsive Map */
+        .map-container {
+            overflow: hidden;
+            position: relative;
+            height: 0;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+        .map-container iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+        .top-right-link {
+            position: fixed;
+            top: 20px; /* Adjust top position as needed */
+            right: 20px; /* Adjust right position as needed */
+            z-index: 9999; /* Ensure it's above other elements */
+        }
+        
+        .top-right-link .button {
+            font-size:24px;
+            color: blue;
+            border: none;
+            padding: 20px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .top-right-link .button:hover {
+          
+        }
+        
+        .top-right-link .button i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        
+    </header>
+    <div class="top-right-link">
+        <a href="/auth/dashboard/" class="button"><i class="fas fa-home"></i></a>
+    </div>
+    <div class="container">
+        <div class="contact-box">
+            <h2>Social Media</h2>
+            <!-- Facebook link -->
+            <a href="https://www.facebook.com/Sohayab07"><i class="fab fa-facebook"></i> Facebook</a>
+            <!-- Instagram link -->
+            <a href="https://www.instagram.com/_smolmeow_/" class="instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <!-- Twitter link -->
+            <a href="https://twitter.com/cutiepatooteeei" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
+        </div>
+        <div class="contact-box">
+            <h2>Our Location</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.1335299223436!2d90.34294559999999!3d23.772447799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c78e49160331%3A0x2fd8ec432cec9fc4!2sKha%20224%2C%20Bir%20Uttam%20Rafiqul%20Islam%20Ave%2C%20Dhaka%201212!5e0!3m2!1sen!2sbd!4v1649644280256!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="contact-box">
+            <h2>Phone Number</h2>
+            <div class="number">
+                <i class=""></i>
+                <a href=''>+123456789</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Midnight Mirage </p>
+    </footer>
+</body>
+</html>

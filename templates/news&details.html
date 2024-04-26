@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System - News and Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .news-details-body {
+            background-image: url('/static/image/350880-best-website-background-1920x1200-for-iphone-5 (1).jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff; /* Adjust text color for better readability */
+        }
+
+        /* Font styles for headings */
+        h2 {
+            font-size: 24px; /* Increase font size */
+            font-weight: bold; /* Add bold font weight */
+            color: #007bff; /* Change font color */
+            -webkit-text-stroke: 1px black; /* Add text stroke for outlining */
+            text-stroke: 1px black;
+        }
+
+        h3 {
+            font-size: 20px; /* Increase font size */
+            font-weight: bold; /* Add bold font weight */
+            color: #007bff; /* Change font color */
+            -webkit-text-stroke: 1px black; /* Add text stroke for outlining */
+            text-stroke: 1px black;
+        }
+
+        /* Font styles for paragraph text */
+        p {
+            font-size: 16px; /* Increase font size */
+            color: #333; /* Change font color */
+            line-height: 1.6; /* Add line height for better readability */
+        }
+
+        /* Font styles for links */
+        a {
+            color: #007bff; /* Change link color */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s; /* Add transition for smooth color change */
+        }
+
+        a:hover {
+            color: #0056b3; /* Change link color on hover */
+        }
+
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .news-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .news-article {
+            margin-bottom: 20px;
+        }
+
+        .social-media-links {
+            margin-top: 10px;
+        }
+
+        .social-media-links a {
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+        .event-management h2,
+        .local-area-info h2 {
+            font-weight: bold; /* Add bold font weight */
+        }
+        .event-management p,
+        .local-area-info p {
+            font-weight: bold;
+            color: #070707; /* Add bold font weight */
+        }
+        .read-only i {
+            color: #28a745; /* Tick green */
+            margin-right: 5px;
+        }
+        
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .button:hover {
+            background-color: #0056b3;
+        }
+        
+        .button i {
+            margin-right: 5px;
+        }
+        
+        .location-button {
+            background-color: #dc3545;
+        }
+        /* Add this CSS at the end of your existing CSS code */
+.top-right-link {
+    position: fixed;
+    top: 20px; /* Adjust top position as needed */
+    right: 20px; /* Adjust right position as needed */
+    z-index: 9999; /* Ensure it's above other elements */
+}
+
+.top-right-link .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.top-right-link .button:hover {
+    background-color: #0056b3;
+}
+
+.top-right-link .button i {
+    margin-right: 5px;
+}
+
+    </style>
+</head>
+<body class="news-details-body">
+
+<section class="news-section">
+    <h2>News and Details</h2>
+    <div class="top-right-link">
+        <a href="/" class="button"><i class="fas fa-home"></i> Home</a>
+    </div>
+    <div class="news-article">
+        <h3>World's Best Counted Hotel: XYZ Hotel</h3>
+        <p>A renowned establishment recognized globally for its exceptional quality, service, and amenities. This prestigious hotel consistently receives top accolades and accolades from travelers, industry experts, and prestigious award organizations for its unparalleled hospitality and commitment to excellence. With luxurious accommodations, world-class facilities, and a dedication to guest satisfaction, World's Best Counted Hotel sets the standard for hospitality and remains a sought-after destination for discerning travelers seeking a truly memorable experience.
+        </p>
+        <a href="/besthotel" style=" color: maroon; font-size: 18px;">Read More <i class="fas fa-check"></i></a>
+
+        <div class="social-media-links">
+            <a href="https://www.facebook.com/BWHRBang" style="color:#3b5998; font-size: 20px;"><i class="fab fa-facebook-f facebook"></i></a>
+            <a href="https://www.instagram.com/beautifulhotels/?hl=en" style="color: #1DA1F2; font-size: 20px;"><i class="fab fa-instagram instagram"></i></a>
+            <a href="https://twitter.com/bestwestern" style="color: #C13584; font-size: 20px;"><i class="fab fa-twitter twitter"></i></a>
+        </div>
+    </div>
+    <div class="news-article">
+        <h3>Update on World Tourist Spots</h3>
+        <p>This update highlights recent developments, attractions, and trends in the global tourism industry, offering travelers the latest updates on popular and emerging destinations. From iconic landmarks to hidden gems, this update aims to inspire and inform travelers, helping them plan unforgettable journeys and explore the world's diverse cultures, natural wonders, and historical sites. Whether seeking adventure, relaxation, or cultural experiences, the Update on World Tourist Spots serves as a valuable resource for travelers seeking to discover new destinations and create memorable travel experiences.
+        </p>
+        <a href="/worldtouristspot" style=" color: maroon; font-size: 20px;">Read More <i class="fas fa-check"></i></a>
+
+        <div class="social-media-links">
+            <a href="https://www.facebook.com/WorldBestPlaceForTravel" style="color:#3b5998; font-size: 20px;"><i class="fab fa-facebook-f facebook"></i></a>
+            <a href="https://www.instagram.com/beautifuldestinations/?hl=en" style="color: #1DA1F2; font-size: 20px;"><i class="fab fa-instagram instagram"></i></a>
+            <a href="https://twitter.com/ebdestinations" style="color: #C13584; font-size: 20px;"><i class="fab fa-twitter twitter"></i></a>
+        </div>
+    </div>
+    <!-- Add more news articles here -->
+</section>
+
+<section class="event-management">
+    <h2>Event Management</h2>
+    <p>The Event Management section provides a concise overview of the services offered by Hotel Management System in organizing and coordinating events. It highlights the expertise and capabilities of the hotel in managing various types of events, such as conferences, meetings, weddings, and other special occasions. From venue selection to catering, decor, and logistics, the hotel's event management team ensures seamless execution and memorable experiences for clients and guests. Whether planning a corporate event or a personal celebration, clients can rely on the hotel's expertise and attention to detail to bring their vision to life and create successful and memorable events.</p>
+    <a href="/eventmanagement" class="button"><i class="far fa-calendar-alt"></i> Event Management Links</a>
+</section>
+
+<section class="local-area-info">
+    <h2>Local Area Information</h2>
+
+    <p>The Local Area Information section provides valuable insights into the surrounding area where the hotel is located. It includes details about nearby attractions, landmarks, dining options, shopping centers, and other points of interest that guests might want to explore during their stay. By offering information about local attractions and amenities, the hotel helps guests make the most of their visit and enhances their overall experience. Additionally, the section may include tips and recommendations for transportation options and navigating the local area effectively. Overall, it serves as a helpful resource for guests looking to discover and explore the area around the hotel.
+    </p>
+    <a href="https://www.visualcapitalist.com/map-the-top-tourist-attraction-in-every-country/" class="button location-button"><i class="fas fa-map-marker-alt"></i> Location</a>
+</section>
+
+<footer>
+    <div class="footer-links">
+        <a href="https://www.facebook.com/BWHRBang"><i class="fab fa-facebook-f facebook"></i></a>
+        <a href="https://www.instagram.com/beautifulhotels/?hl=en"><i class="fab fa-instagram instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter twitter"></i></a>
+    </div>
+    <p>&copy; 2024 Hotel Management System</p>
+</footer>
+</body>
+</html>

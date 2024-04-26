@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-+qj/zlGOxFkJ7sAF+JXxWhdjY9x77rYPLp00/5CpO6qyFdaGK0B8JymZC+gfkqN9P2qgsBrrVcNn0tI+cftMxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/static/payment/836a9093613879.5e6921407b423.jpg'); /* Change 'path/to/your/image.jpg' to the actual path of your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color:black;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 36px;
+            color:black;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 34px;
+            color:Black;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: cursive;
+        }
+        p {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .invoice-box {
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: transparent;
+            background-position: center;
+            
+            background-repeat: no-repeat;
+           
+            position: relative;
+        }
+        .invoice-box img.logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 100px; /* Adjust max-width as needed */
+            height: auto;
+            margin-bottom: 20px; /* Adjust margin as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Successful</h1>
+        <div class="invoice-box">
+            <h2>Invoice</h2>
+            <p><strong>Guest Name:</strong> {{ name }}</p>
+            <p><strong>Number of Rooms:</strong> {{ num_rooms }}</p>
+            <p><strong>Room Type:</strong> {{ room_type }}</p>
+            <p><strong>Payment Method:</strong> {{ payment_option }}</p>
+            <p><strong>Amount:</strong> {{ amount }}</p>
+            <img src="{{ payment_option_image }}" alt="Payment Option Logo" >
+        </div>
+        
+    </div>
+</body>
+</html>

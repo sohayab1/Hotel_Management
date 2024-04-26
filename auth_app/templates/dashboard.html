@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* Changed to white */
+        }
+        header {
+            position: relative;
+            height: 300px; /* Adjust height as needed */
+            background-image: url('/static/image/clouds-648550_1280.jpg'); /* Add your image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff; /* Text color */
+        }
+        
+        .header-text {
+            color: #000; 
+            padding: 20px; /* Adjust padding as needed */
+            animation: fadeIn 5s infinite; /* Add animation */
+            
+        }
+        
+        .header-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            -webkit-text-stroke: 2px white; /* Add text stroke for outlining */
+            text-stroke: 1px black;
+        }
+        
+        .header-text p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            -webkit-text-stroke: 1px black; /* Add text stroke for outlining */
+            text-stroke: 1px black;
+        }
+        
+        nav {
+            background-color: #0a0e11; /* Blue */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #faf0f0;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #070707; /* White */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow */
+            position: relative;
+        }
+        .image-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .image-slider ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: slideshow 10s infinite;
+        }
+        .image-slider li {
+            width: 100%;
+            flex: 0 0 auto;
+            position: relative; /* Relative positioning for absolute button placement */
+            text-align: center; /* Center align content */
+        }
+        .image-slider img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .book-now-button {
+            background-color: #0c0c0c;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            position: absolute;
+            bottom: 40px; /* Adjusted to make room for the content */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* Ensure button is above the images */
+        }
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            -webkit-text-stroke: 2px black; /* Add text stroke for outlining */
+            text-stroke: 1px black;
+            font-weight: bold; /* Make the text bolder */
+            font-size: 24px;
+            
+        }
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .banner p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: #0e0e0f;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        
+        .footer-links a:hover {
+            color: #0a0a0a;
+        }
+        
+        /* Animation for fade in */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .search-bar {
+            display: inline-block;
+            margin-left: auto; /* Push the search bar to the right */
+            position: relative;
+        }
+        .search-bar input[type="text"] {
+            padding: 8px 30px 8px 10px; /* Adjust padding to accommodate the icon */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            font-size: 18px;
+            color: #999; /* Adjust icon color */
+            cursor: pointer;
+        }
+        #user-profile-btn, #edit-profile-btn, #close-profile-btn {
+            background-color: black; /* Green background color */
+            border: none; /* No border */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center align text */
+            text-decoration: none; /* No text decoration */
+            display: inline-block; /* Display as inline block */
+            font-size: 16px; /* Font size */
+            margin: 4px 2px; /* Margin */
+            cursor: pointer; /* Cursor style */
+            border-radius: 5px; 
+            
+            
+           /* Rounded corners */
+        }
+        #user-profile-container {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            z-index: 999; /* Ensure it's above other content */
+        }
+        
+        .user-profile-content {
+            background-color: #fff; /* White background */
+            max-width: 400px; /* Max width of the container */
+            margin: 20px auto; /* Center align */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow */
+        }
+        
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        
+        .profile-info p {
+            margin: 5px 0;
+        }
+        
+        .profile-actions {
+            text-align: right;
+        }
+        
+        
+        #edit-profile-btn {
+            background-color: #008CBA; /* Blue background color for edit profile button */
+        }
+        
+        #close-profile-btn {
+            background-color: #f44336; /* Red background color for close button */
+        }
+        
+        /* CSS for profile edit page */
+        /* You can adjust the styling based on your design preferences */
+        
+       
+    </style>
+</head>
+<body>
+    <button id="user-profile-btn">User Profile</button>
+    <div id="user-profile-container" style="display: none;">
+        <div class="user-profile-content">
+            <div class="profile-info">
+                 <p>Name: {{ user.username }}</p>
+                 <p>Email: {{ request.user.email }}</p>
+            </div>
+            <div class="profile-actions">
+                 <a href="{% url 'profile_edit' %}"><button id="edit-profile-btn">Edit Profile</button></a>
+                 <button id="close-profile-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    <header>
+        
+        
+            <div class="header-text">
+                <h1>Welcome {{ request.user.username }}!</h1>
+                <p>Experience luxury and comfort</p>
+                  
+        </div>
+    </header>
+    <nav>
+        <a href="/facilities">Facilities</a>
+        <a href="/contact">Contact</a>
+        <a href="/news&details">News & Details</a>
+        <a href="/aboutus">AboutUs</a>
+        <a href="/help_page">FAQ</a>
+        <a href="/review">Review</a>
+        <div class="search-bar">
+            <form action="/hotel_search_results" method="GET">
+                <input type="text" name="query" placeholder="Search...">
+                <button class="search-icon">&#128269;</button>
+            </form>
+            
+            <!--<a href="/hotel_list" class="search-icon">&#128269;</a> --><!-- Unicode for search icon -->
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Image slider replaces the banner section -->
+        <div class="image-slider">
+            <ul>
+                <li>
+                    <img src="\static\image\Best Hotel Website Designs.jpg" alt="Slider Image 1">
+                    <div class="banner-content">
+                        <h1>Experience Luxury</h1>
+                        <p>Book your stay now</p>
+                    </div>
+                    <a href="/hotel_list" class="book-now-button">Book Now</a>
+                </li>
+                <li>
+                    <img src="\static\image\Best Hotel Website Designs2.jpg" alt="Slider Image 2">
+                    <div class="banner-content">
+                        <h1>Experience Luxury</h1>
+                        <p>Book your stay now</p>
+                    </div>
+                    <a href="/hotel_list" class="book-now-button">Book Now</a>
+                </li>
+                
+                <li>
+                    <img src="\static\image\IMG_8341.jpg" alt="Slider Image 3">
+                    <div class="banner-content">
+                        <h1>Experience Luxury</h1>
+                        <p>Book your stay now</p>
+                    </div>
+                    <a href="/hotel_list" class="book-now-button">Book Now</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <!-- Your existing HTML content -->
+    
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/terms&conditions" style="background-color: #080808;color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-left: 10px;">Terms and Conditions</a>
+        <a href="/customerservice" style="background-color: #080808;color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Contact Customer Service</a>
+        <a href="https://direct.lc.chat/17540466/" class="btn btn-primary"></a>
+        <a href="/" style="background-color: #0b0c0c;color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Logout</a>
+        <a href="https://direct.lc.chat/17540466/" class="btn btn-primary"></a>
+    </div>
+    <div id="live-chat">
+        <!-- Live chat code snippet -->
+        <!-- Start of LiveChat (www.livechat.com) code -->
+        <script>
+            window.__lc = window.__lc || {};
+            window.__lc.license = 17540466;
+            ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+        </script>
+        <noscript><a href="https://www.livechat.com/chat-with/17540466/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
+        <!-- End of LiveChat code -->
+    </div>
+    
+    <footer>
+        <p>&copy; Midnight Mirage</p>
+    </footer>
+    <script>
+        // JavaScript for swipe slide option
+        const imageSlider = document.querySelector('.image-slider ul');
+        const images = document.querySelectorAll('.image-slider li');
+
+        let currentIndex = 0;
+        const slideWidth = images[currentIndex].clientWidth;
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            imageSlider.style.transition = 'transform 0.5s ease-in-out';
+            imageSlider.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+        }, 5000); // Change slide every 5 seconds
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const startChatButton = document.getElementById('start-chat');
+            const queryConfirmation = document.getElementById('query-confirmation');
+            const liveChat = document.getElementById('live-chat');
+    
+            startChatButton.addEventListener('click', function () {
+                // Hide the query confirmation section
+                queryConfirmation.style.display = 'none';
+                // Show the live chat interface
+                liveChat.style.display = 'block';
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userProfileBtn = document.getElementById('user-profile-btn');
+            const userProfile = document.getElementById('user-profile-container');
+
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const closeProfileBtn = document.getElementById('close-profile-btn');
+    
+            userProfileBtn.addEventListener('click', function () {
+                userProfile.style.display = 'block';
+            });
+    
+            closeProfileBtn.addEventListener('click', function () {
+                userProfile.style.display = 'none';
+            });
+    
+            editProfileBtn.addEventListener('click', function () {
+                // Redirect to the edit profile page
+                window.location.href = "{% url 'profile_edit' %}";
+            });
+        });
+    </script>
+    <script>
+        // Listen for the logout button click
+        document.getElementById('logout-button').addEventListener('click', function() {
+            // Set the 'logged_out' flag in localStorage
+            localStorage.setItem('logged_out', 'true');
+        });
+    </script>
+</body>
+</html>

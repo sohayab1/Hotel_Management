@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Detail</title>
+    <script src="https://kit.fontawesome.com/692189991f.js" crossorigin="anonymous"></script>
+
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="{% static 'hotel/css/detail.css' %}" >
+    <style>
+        /* Style for the review button */
+        .home a,
+        .review a {
+            display: inline-block;
+            padding: 15px 30px;
+            
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home a:hover,
+        .review a:hover {
+          
+        }
+
+        .home a i,
+        .review a i {
+            margin-right: 5px;
+        }
+
+        /* Style for the review link */
+        .review {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .category-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .category-images img {
+            width: 48%; /* Set width for two images per row with a small gap */
+            margin-bottom: 20px; /* Add some space between rows */
+            border: 2px solid white; /* Add a white border around the images */
+            border-radius: 5px;
+            object-fit: contain;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .category-images img {
+                width: 100%; /* Set images to occupy full width on smaller screens */
+            }
+        }
+        
+       
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Main Content -->
+    <div class="content">
+        
+
+        <!-- Room Image -->
+        <div class="image">
+            <!-- Use conditional logic to load different links based on room_category -->
+            
+            {% if room_category == 'AC' %}
+            <iframe width="100%" height="1150px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                src="https://panoraven.com/en/embed/n0IKLEaUq7"></iframe>
+            {% elif room_category == 'NON-AC' %}
+            <iframe width="100%" height="1100px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                src="https://panoraven.com/en/embed/V1ABqdltZ2"></iframe>
+            {% elif room_category == 'DELUXE' %}
+            <iframe width="100%" height="1100px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                src="https://panoraven.com/en/embed/0C1rH9HkWy"></iframe>
+            {% elif room_category == 'KING' %}
+            <iframe width="100%" height="1150px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                src="https://panoraven.com/en/embed/BBrOGf3XPI"></iframe>
+            {% elif room_category == 'QUEEN' %}
+            <iframe width="100%" height="1300px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                src="https://panoraven.com/en/embed/709aIeuSa1"></iframe>
+            {% endif %}
+        </div>
+
+        <!-- Room Details -->
+        <div class="room">
+           
+
+            <!-- Div 1: Back to Home -->
+            <div class="home">
+                <a href="/room_list/"><i class="fas fa-arrow-alt-circle-left">Back</i></a>
+            </div>
+
+            <!-- Div 2: Room Information -->
+            <div class="room-info">
+                <h1>{{ room_category }}</h1>
+                <div style="margin-bottom: 20px;"></div> 
+                {% if room_category == 'AC' %}
+                    <p style="font-size: 20px; font-family:  'Pacifico', cursive; ">Experience comfort and luxury in our air-conditioned rooms. Perfect for those seeking a cool retreat after a long day of exploration. Our AC rooms are equipped with modern amenities to ensure a relaxing stay. Enjoy a restful night's sleep on our plush beds and wake up refreshed to start your day.</p>
+                {% elif room_category == 'NON-AC' %}
+                    <p style="font-size: 18px; font-family:  'Pacifico', cursive;">Enjoy a cozy stay in our non-air-conditioned rooms. Ideal for budget-conscious travelers looking for a comfortable accommodation option. Our Non-AC rooms offer a warm and inviting atmosphere, complete with essential amenities to make your stay pleasant and memorable.</p>
+                {% elif room_category == 'DELUXE' %}
+                    <p style="font-size: 18px; font-family:  'Pacifico', cursive;">Indulge in the ultimate luxury experience with our deluxe rooms. Featuring spacious interiors and elegant amenities, these rooms are designed for discerning travelers. Treat yourself to a VIP stay with personalized services and exclusive perks available only in our deluxe accommodations.</p>
+                {% elif room_category == 'KING' %}
+                    <p style="font-size: 18px; font-family:  'Pacifico', cursive;">Relax like royalty in our king rooms. With lavish furnishings and extra space, these rooms offer the epitome of luxury and comfort. Unwind in style with amenities fit for a king, including a comfortable seating area, premium bedding, and stunning views of the surrounding landscape.</p>
+                {% elif room_category == 'QUEEN' %}
+                    <p style="font-size: 18px; font-family:  'Pacifico', cursive;">Experience elegance and charm in our queen rooms. Thoughtfully designed with stylish décor and modern amenities, these rooms provide a delightful stay. Pamper yourself with a relaxing soak in the bathtub or unwind with a movie on the flat-screen TV. Our queen rooms offer the perfect blend of comfort and sophistication for your next getaway.</p>
+                {% endif %}
+            </div>
+             
+            <div class="facilities">
+                <div style="margin-bottom: 10px;"></div>
+                <h3 style="font-size: 28px; font-family:  'Pacifico', cursive;margin-bottom: 10px; ">Facilities:</h3>
+                <ul style="font-size: 20px;">
+                    {% if room_category == 'AC' %}
+                        <li>High-speed Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Mini refrigerator</li>
+                        <li>24-hour room service</li>
+                    {% elif room_category == 'NON-AC' %}
+                        <li>High-speed Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Fan</li>
+                        <li>Mini refrigerator</li>
+                        <li>24-hour room service</li>
+                    {% elif room_category == 'DELUXE' %}
+                        <li>High-speed Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Mini refrigerator</li>
+                        <li>Private balcony</li>
+                        <li>Spa tub</li>
+                        <li>24-hour room service</li>
+                    {% elif room_category == 'KING' %}
+                        <li>High-speed Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Mini refrigerator</li>
+                        <li>Separate sitting area</li>
+                        <li>King-sized bed</li>
+                        <li>24-hour room service</li>
+                    {% elif room_category == 'QUEEN' %}
+                        <li>High-speed Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Mini refrigerator</li>
+                        <li>Work desk</li>
+                        <li>24-hour room service</li>
+                    {% endif %}
+                </ul>
+            </div>
+        
+            <div style="margin-bottom: 20px;"></div>
+            <div class="category-images">
+                {% if room_category == 'AC' %}
+                <img src="{% static 'Ac/10_ACGinza.jpg' %}" alt="AC Room Image">
+                <img src="{% static 'Ac/ac.jpg' %}" alt="AC Room Image">
+                <img src="{% static 'Ac/c38b73c5-ae4c-4460-b3d7-66e60545275d.jpg' %}" alt="AC Room Image">
+                <img src="{% static 'Ac/istockphoto-1370825295-612x612.jpg' %}" alt="AC Room Image">
+
+                <!-- Add more AC room images as needed -->
+                {% elif room_category == 'NON-AC' %}
+                <img src="{% static 'NonAc/2021-Hotel-Industry-Design-Trends.jpeg' %}" alt="Non-AC Room Image">
+                <img src="{% static 'NonAc/63579b8d0d69e5f37893c711_pexels-audiovisual-mx-13695047.jpg' %}" alt="Non-AC Room Image">
+                <img src="{% static 'NonAc/Hotel-Air-Conditioning-Blog-3.jpg' %}" alt="Non-AC Room Image">
+                <img src="{% static 'NonAc/images.jpg' %}" alt="Non-AC Room Image">
+                <!-- Add more Non-AC room images as needed -->
+                {% elif room_category == 'DELUXE' %}
+                <img src="{% static 'Deluxe/6dd6271a-9a7f-4cc0-b81e-d1988ea67a2d-Pangu 7 star hotel 7.jpg' %}" alt="Deluxe Room Image">
+                <img src="{% static '\Deluxe\70a8ab5aa285df3fa6c8b95d497dadcd.jpg' %}" alt="Deluxe Room Image">
+                <img src="{% static '\Deluxe\images.jpg' %}" alt="Deluxe Room Image">
+                <img src="{% static '\Deluxe\RR-Standard-2-Queen.jpg' %}" alt="Deluxe Room Image">
+                <!-- Add more Deluxe room images as needed -->
+                {% elif room_category == 'KING' %}
+                <img src="{% static '\King\1.jpg' %}" alt="King Room Image">
+                <img src="{% static '\King\1691136500_en-idei-club-p-simple-hotel-room-design-dizain-pinterest-51.jpg' %}" alt="King Room Image">
+                <img src="{% static '\King\Hotel-Room-Furniture-3.jpg' %}" alt="King Room Image">
+                <img src="{% static '\King\indore-hotel-500x500.jpg' %}" alt="King Room Image">
+                <!-- Add more King room images as needed -->
+                {% elif room_category == 'QUEEN' %}
+                <img src="{% static '\Queen\824e4aaae0a008c38decc49f9ad51596.jpg' %}" alt="Queen Room Image">
+                <img src="{% static '\Queen\1658927618005.jpg' %}" alt="Queen Room Image">
+                <img src="{% static '\Queen\modern_hotel_rooms_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_3785403_o.jpg' %}" alt="Queen Room Image">
+                <img src="{% static '\Queen\set-up-a-bedroom-that-feels-like-a-hotel-room-.jpg' %}" alt="Queen Room Image">
+
+                <!-- Add more Queen room images as needed -->
+                {% endif %}
+            </div>
+        
+
+                <!-- Input Div -->
+                
+               
+
+            
+
+            
+        </div> <!-- END Room Div -->
+
+    </div> <!-- END Main Content Div -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+        /* Additional CSS for search results */
+        /* Ensure that the styles from hotel_list.html are applied here as well */
+        .hotel-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .hotel-card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hotel-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .hotel-info {
+            padding: 15px;
+        }
+        
+        .hotel-info h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .hotel-info p {
+            margin: 0;
+        }
+        
+        .hotel-info a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 8px 0;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .hotel-info a:hover {
+            background-color: #ddd;
+        }
+        .home a {
+            display: inline-block;
+            padding: 15px 0;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            border-right: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .home a:last-child {
+            border-right: none;
+            margin-right: 0;
+        }
+
+        .home a i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="home">
+        <a href="/"><i class="fas fa-arrow-alt-circle-left"></i>Home </a>
+    </div>
+    {% if hotels %}
+    <h1>Search Results for "{{ query }}"</h1>
+    <div class="hotel-list">
+        {% for hotel in hotels %}
+        <div class="hotel-card">
+            <!-- Use the hotel's image if available, otherwise use a placeholder -->
+            <img src="{% static 'pics/' %}{{ hotel.name }}.jpg" alt="{{ hotel.name }}">
+            <div class="hotel-info">
+                <h2>{{ hotel.name }}</h2>
+                <p>{{ hotel.location }}</p>
+                <p>{{ hotel.brief_summary }}</p>
+                <!-- Use the url template tag to generate the URL for hotel detail -->
+                <a href="/hotel_detail/{{ hotel.id }}/">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No hotels found for "{{ query }}".</p>
+    {% endif %}
+</body>
+</html>

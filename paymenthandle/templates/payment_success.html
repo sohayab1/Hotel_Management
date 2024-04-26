@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-+qj/zlGOxFkJ7sAF+JXxWhdjY9x77rYPLp00/5CpO6qyFdaGK0B8JymZC+gfkqN9P2qgsBrrVcNn0tI+cftMxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/static/payment/836a9093613879.5e6921407b423.jpg'); /* Change 'path/to/your/image.jpg' to the actual path of your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 36px;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 34px;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: cursive;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .invoice-box {
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: transparent;
+            background-position: center;
+            
+            background-repeat: no-repeat;
+           
+            position: relative;
+        }
+        .invoice-box img.logo {
+            position: relative;
+            bottom: 0px; /* Adjust as needed */
+            left: 650px; /* Adjust as needed */
+            width: 100px; /* Adjust width as needed */
+            height: 1; /* Maintain aspect ratio */
+            z-index: 1; /* Ensure the logo is above the background image */
+            opacity: 2; /* Adjust the opacity for transparency */
+        }
+        
+        .download-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .download-btn i {
+            margin-right: 5px;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .popup-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .popup-message {
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .close-button:hover {
+            background-color: #d32f2f;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Successful</h1>
+        <div class="invoice-box" >
+            
+            <h2>Invoice</h2>
+            <form id="hotelNameForm" style="display: none;">
+                <input type="hidden" id="hotel_name_input" name="hotel_name" value="{{ hotel_name }}">
+            </form>
+            <p><strong>Hotel Name:</strong> {{ hotel.name }}</p>
+            <p><strong>Guest Name:</strong> {{ name }}</p>
+
+            <p><strong>Number of Rooms:</strong> {{ num_rooms }}</p>
+            <p><strong>Room Type:</strong> {{ room_type }}</p>
+            <p><strong>Payment Method:</strong> 
+                {% if payment_option == 'cash' %}
+                {{ payment_option }}(To be paid)
+                {% else %}
+                    {{ payment_option }}
+                {% endif %}
+            </p>
+            <p><strong>Amount:</strong> {{ amount }}</p>
+            <img src="{{ payment_option_image }}" alt="Logo" class="logo">
+        </div>
+       
+
+
+        <!-- Add hidden form fields to submit payment information -->
+        
+            <button type="submit" class="download-btn" onclick="printpdf()"><i class="fas fa-download"></i> Download </button>
+        
+    </div>
+    <script>
+        function printpdf() {
+            // Submit the hidden form to download the invoice with hotel name
+            document.getElementById("hotelNameForm").submit();
+        }
+    </script>
+    <script>
+        function clicked(e) {
+            var name = "{{ name }}";
+            if (!confirm('Booked for ' + name)) {
+                e.preventDefault();
+            }
+        }
+    </script>
+    <script>
+        function printpdf() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

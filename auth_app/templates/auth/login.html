@@ -1,0 +1,75 @@
+{% extends 'layouts/app.html' %}
+{%load static%}
+{% block content %}
+<style>
+    body {
+        background-image: url('{% static "pics/wp6180003.jpg" %}');
+        background-size: cover; /* Cover the entire background */
+        background-repeat: no-repeat; /* Do not repeat the background image */
+        background-position: center center; /* Center the background image */
+        height: 100vh; /* Ensure the background covers the entire viewport height */
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Center vertically within the viewport */
+    }
+
+    .login-form {
+        background-color: transparent; /* Semi-transparent white background */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .login-form h2 {
+        color: black; /* Dark font color */
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        color: #333; /* Dark font color */
+    }
+</style>
+<div class="container">
+<div class="row justify-content-center login-container">
+    <div class="col-sm-6">
+        <div class= "login-form">
+        <h2 class="text">Login</h2>
+
+        {% if form.non_field_errors %}
+        <small class="text-danger">
+            {{ form.non_field_errors.as_ul }}
+        </small>
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label}}">Username:</label>
+                <input type="text" name="{{ form.username.name }}" class="form-control" value="{{ form.username.value}}" />
+                {% if form.username.errors %}
+                <span class="text-danger">{{ form.username.errors }}</span>
+                {% endif %}
+            </div>
+            
+
+            
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label}}">Password:</label>
+                <input type="password" name="{{ form.password.name }}" class="form-control" value="{{ form.password.value}}" />
+                <span class="text-danger">{{ form.password.errors }}</span>
+            </div>
+
+
+            <button type="submit" class="btn btn-dark">Login</button>
+
+            <button class="btn btn-dark"><a href="{% url 'register' %}">Create a new account</a></button>
+            <button class="btn btn-dark"><a href="/">Home</a></button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

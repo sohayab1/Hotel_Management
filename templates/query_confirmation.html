@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Confirmation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <!-- Add your CSS links here -->
+    <style>
+        /* Custom CSS styles */
+        /* Apply styles to the confirmation message container */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url('/static/image/1_k6MjB169pA_viYGVMpJmLQ.gif'); /* Add your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .confirmation-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: transparent; /* Transparent background */
+        }
+
+        .confirmation-message {
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Light gray with opacity */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Style the heading */
+        .confirmation-message h2 {
+            font-size: 28px;
+            color: #343a40; /* Dark gray */
+        }
+
+        /* Style the paragraph */
+        .confirmation-message p {
+            font-size: 18px;
+            color: #6c757d; /* Gray */
+        }
+
+        /* Style the confirmation icon */
+        .confirmation-icon {
+            font-size: 48px;
+            color: #28a745; /* Green */
+            margin-bottom: 20px;
+        }
+
+        /* Style the footer */
+        footer {
+            background-color: #343a40; /* Dark gray */
+            color: #fff; /* White */
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Style the footer text */
+        footer p {
+            margin: 0;
+        }
+
+        /* Home icon style */
+        .home-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+        #live-chat {
+        display: none;
+        /* Add styles to customize the appearance of the live chat interface */
+        /* For example: */
+        border: 1px solid #ccc;
+        padding: 20px;
+        background-color: #f9f9f9;
+        /* Add additional styles as needed */
+    }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-icon">🏠</a> 
+    <div class="confirmation-container">
+        <div class="confirmation-message">
+            <div class="confirmation-icon">&#10003;</div> <!-- Confirmation icon -->
+            <h2>Query Confirmation</h2>
+            <p>Your query has been forwarded to our customer service team. They will get back to you shortly.</p>
+            <!-- Embed LiveChat link as a button -->
+            <a href="https://direct.lc.chat/17540466/" class="btn btn-primary">Start Live Chat</a>
+       
+        </div>
+    </div>
+    <div id="live-chat">
+        <!-- Live chat code snippet -->
+        <!-- Start of LiveChat (www.livechat.com) code -->
+        <script>
+            window.__lc = window.__lc || {};
+            window.__lc.license = 17540466;
+            ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+        </script>
+        <noscript><a href="https://www.livechat.com/chat-with/17540466/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
+        <!-- End of LiveChat code -->
+    </div>
+    <footer>
+        <p>&copy; 2024 Hotel Management System</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const startChatButton = document.getElementById('start-chat');
+            const queryConfirmation = document.getElementById('query-confirmation');
+            const liveChat = document.getElementById('live-chat');
+    
+            startChatButton.addEventListener('click', function () {
+                // Hide the query confirmation section
+                queryConfirmation.style.display = 'none';
+                // Show the live chat interface
+                liveChat.style.display = 'block';
+            });
+        });
+    </script>
+    
+</body>
+</html>

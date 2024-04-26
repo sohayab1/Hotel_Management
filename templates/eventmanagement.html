@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System - News and Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>/* styles.css */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/image/wp12194618.png'); /* Background image */
+            background-size: cover;
+            
+        }
+        
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Existing styles for nav, news-section, etc... */
+        
+        .news-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);;
+            border-radius: 5px;
+        }
+        
+        .envelope {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+            width: fit-content; /* Adjust width to content */
+            margin: 20px auto; /* Center horizontally and add margin */
+        }
+        
+        .envelope h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .envelope p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .read-more-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            background-color: #0056b3;
+        }
+
+        
+        .top-right-link {
+            position: fixed;
+            top: 20px; /* Adjust top position as needed */
+            right: 20px; /* Adjust right position as needed */
+            z-index: 9999; /* Ensure it's above other elements */
+        }
+        
+        .top-right-link .button {
+            font-size: 24px;
+            color: black; /* Set color to black */
+            border: none;
+            padding: 10px;
+            border-radius: 50%; /* Make it round */
+            background-color: transparent; /* Remove background color */
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .top-right-link .button:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Add hover effect */
+        }
+        </style>
+</head>
+<body>
+    <div class="top-right-link">
+        <a href="/auth/dashboard/" class="button"><i class="fas fa-home"></i>🏚️</a>
+    </div>
+
+    <section class="news-section">
+        <h2>Event Management</h2>
+        <div class="news-article">
+            <h3>May Day</h3>
+            <p>International Labour Day</p>
+            <a href="https://www.macdonaldhotels.co.uk/portal/blog/may-day-bank-holiday" class="read-more-btn">Read More</a>
+        </div>
+        <div class="news-article">
+            <h3>10th November</h3>
+            <p>Neha day.</p>
+            <a href="https://www.panpacific.com/en/hotels-and-resorts/pp-dhaka/meet.html" class="read-more-btn">Read More</a>
+        </div>
+        <!-- Add more news articles here -->
+    </section>
+    <div class="envelope">
+        <h2>Promo Code</h2>
+        <p>Use promo code <strong>"love14"</strong> to get 14% off on your next booking!</p>
+    </div>
+
+    <footer>
+        
+        <p>&copy; Midnight Mirage</p>
+    </footer>
+    
+</body>
+</html>

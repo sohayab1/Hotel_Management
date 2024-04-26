@@ -1,0 +1,136 @@
+<!-- hotel_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ hotel.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hotel_detail.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* Additional CSS for hotel_detail.css */
+.hotel-detail1-body {
+    background-image: url('{% static "pics/c45ccc6f1c46da901454ab5fcd076884.jpg"  %}');
+    background-size: cover; /* Cover the entire background */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center center; /* Center the background image */
+    height: 100vh;
+    display: flex; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.content-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    padding: 20px; /* Add padding to create space around content */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    text-align: center; /* Center text */
+    max-width: 80%; /* Limit width of content */
+}
+
+h1 {
+    color: white; /* Set text color to white */
+    font-size: 36px; /* Increase font size */
+    margin-bottom: 20px; /* Add space below text */
+}
+
+.description {
+    color: white; /* Set text color to white */
+    font-size: 20px; /* Increase font size */
+    margin-bottom: 20px; /* Add space below text */
+}
+
+.book-btn-container {
+    margin-top: 20px; /* Add space above the button */
+}
+
+.book-btn {
+    display: inline-block;
+    padding: 15px 30px; /* Increase padding */
+    background-color: white; /* Set button background color to white */
+    color: black; /* Set button text color to black */
+    text-decoration: none;
+    border-radius: 8px; /* Increase border radius */
+    transition: background-color 0.3s ease;
+    font-size: 20px; /* Increase font size */
+}
+
+.book-btn:hover {
+    background-color: #ddd; /* Darken button background color on hover */
+}
+.rooms-available  {
+    margin-top: 0; 
+    color: white;/* Remove top margin of h2 */
+}
+.back-btn-container {
+    position: absolute;
+    top: 20px; /* Adjust vertical position */
+    right: 20px; /* Adjust horizontal position */
+}
+
+/* Back button */
+.back-btn {
+    padding: 10px 15px; /* Adjust padding */
+    background-color: #333; /* Button background color */
+    color: white; /* Button text color */
+    text-decoration: none;
+    border-radius: 5px; /* Button border radius */
+    font-size: 16px; /* Button font size */
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #555; /* Darken button background color on hover */
+}
+
+</style>
+<body class="hotel-detail1-body">
+    <div class="content-container">
+        <h1>{{ hotel.name }}</h1>
+        <p class="description">{{ hotel.description }}</p>
+        <!-- Room list -->
+        <div class="rooms-available h2">
+            <h2>Rooms Available:</h2>
+            </div>
+            <div class="book-btn-container">
+                <a href="/room_list/" class="book-btn">Rooms</a>
+            </div>
+        <!-- Centered book button -->
+        <div class="book-btn-container">
+            <a href="{% url 'process_payment' %}?id={{ hotel.id }}&room_type={{ room_category }}" class="book-btn">Book</a>
+        </div>
+        <div class="back-btn-container">
+            <a href="#" onclick="goBack()" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+        <!-- Hotel images -->
+        <div class="hotel-images-container">
+            {% for image in hotel.images.all %}
+            <img src="{% static 'pics/' %}{{ image }}" alt="Hotel Image" class="hotel-image">
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            var previousPage = getPreviousPage();
+            if (previousPage === 'hotel_search_result') {
+                history.back();
+            } else {
+                window.location.href = "/hotel_list/";
+            }
+        }
+    
+        function getPreviousPage() {
+            // Get the referrer URL
+            var referrer = document.referrer;
+            // Check if the referrer URL contains 'hotel_search_result'
+            if (referrer.includes('hotel_search_result')) {
+                return 'hotel_search_result';
+            } else {
+                return 'other';
+            }
+        }
+    </script>
+</body>
+</html>

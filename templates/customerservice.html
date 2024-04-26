@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/image/customerservicebpohero.jpg'); /* Replace 'your-background-image.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Set the height to 100% of the viewport height */
+            overflow: hidden; /* Hide overflow content */
+        }
+    
+        .customer-service {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black; /* Font color */
+        }
+    
+        .customer-service h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    
+        .customer-service p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .contact-options {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .message-option,
+        .call-option {
+            width: calc(50% - 10px);
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+        }
+        
+    
+        .message-option {
+            border-right: 1px solid #ccc; /* Add partition between options */
+        }
+    
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    
+    
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+    
+        .footer-links a:hover {
+            color: #007bff;
+        }
+       
+        .home-icon {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            font-size: 24px;
+            color: #fff; /* White */
+            text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <a href="/" class="home-icon">🏠</a>
+    <div class="customer-service">
+        
+        <h2>Welcome to Customer Service</h2>
+        <p>Sign in to contact Customer Service – we're available 24 hours a day</p>
+        <div class="contact-options">
+            <a href="{% url 'chat_with_ai' %}" class="message-option">
+                <span class="icon">&#x1F4AC;</span>
+                <span>Send us a message</span>
+                <p>Contact our agents about your booking, and we'll reply as soon as possible.</p>
+            </a>
+            <div class="call-option">
+                <span class="icon">&#x260E;</span>
+                <span>Call us</span>
+                <p>For anything urgent, you can call us 24/7 at a local or international phone number.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Hotel Management System</p>
+    </footer>
+</body>
+</html>

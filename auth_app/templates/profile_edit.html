@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Edit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-+qj/zlGOxFkJ7sAF+JXxWhdjY9x77rYPLp00/5CpO6qyFdaGK0B8JymZC+gfkqN9P2qgsBrrVcNn0tI+cftMxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* CSS for profile edit form */
+        body {
+            font-family: Arial, sans-serif; /* Set font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            background-color: #f2f2f2; /* Set background color */
+        }
+
+        form {
+            max-width: 400px; /* Set max width for the form */
+            margin: 20px auto; /* Center align the form */
+            padding: 20px; /* Add padding to the form */
+            background-color: #fff; /* Set background color for the form */
+            border-radius: 5px; /* Add border radius to form */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow to form */
+        }
+
+        label {
+            display: block; /* Display labels as block elements */
+            margin-bottom: 5px; /* Add bottom margin to labels */
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%; /* Set input fields to full width */
+            padding: 10px; /* Add padding to input fields */
+            border-radius: 5px; /* Add border radius to input fields */
+            border: 1px solid #ccc; /* Add border to input fields */
+            margin-bottom: 10px; /* Add bottom margin to input fields */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* Set background color for submit button */
+            color: #fff; /* Set text color for submit button */
+            padding: 10px 20px; /* Add padding to submit button */
+            border: none; /* Remove border from submit button */
+            border-radius: 5px; /* Add border radius to submit button */
+            cursor: pointer; 
+            margin-right: 240px;/* Set cursor style for submit button */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker background color on hover */
+        }
+        .back-button {
+            background-color: #de718c; /* Set background color for back button */
+            color: #fff; /* Set text color for back button */
+            padding: 10px 20px; /* Add padding to back button */
+            border: none; /* Remove border from back button */
+            border-radius: 5px; /* Add border radius to back button */
+            cursor: pointer; /* Set cursor style for back button */
+            text-decoration: none; /* Remove underline from back button */
+            display: inline-block; /* Display back button as inline-block */
+            margin-top: 10px; /* Add top margin to back button */
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f; /* Darker background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ request.user.profile.name }}"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ request.user.profile.email }}"><br>
+        <!-- Add other profile fields as needed -->
+        <input type="submit" value="Save">
+        <a href="{% url 'dashboard' %}" class="back-button">Back</a>
+    </form>
+    
+</body>
+</html>

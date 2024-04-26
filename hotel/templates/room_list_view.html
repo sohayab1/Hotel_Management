@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotelina</title>
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="{% static 'hotel/css/home.css' %}">
+    <style>
+        .back-btn-container {
+            position: absolute;
+            top: 20px; /* Adjust vertical position */
+            right: 20px; /* Adjust horizontal position */
+        }
+        
+        /* Back button */
+        .back-btn {
+            padding: 10px 15px; /* Adjust padding */
+            background-color: #333; /* Button background color */
+            color: white; /* Button text color */
+            text-decoration: none;
+            border-radius: 5px; /* Button border radius */
+            font-size: 16px; /* Button font size */
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #555; /* Darken button background color on hover */
+        }
+        .taka {
+            font-size: 24px; /* Larger font size for Taka */
+            font-weight: bold; /* Bold font for Taka */
+            color: black; /* Orange color for Taka */
+        }
+        .price-container {
+            margin-top: 20px; /* Space above the price */
+        }
+        
+        .price {
+            font-size: 18px; /* Font size for the price */
+            margin-top: 5px; /* Space between description and price */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-btn-container">
+        <a id="backButton" href="#" onclick="goBack()">Back</a>
+
+    </div>
+
+    <!-- Brand -->
+    <h1 id="brand">Rooms</h1>
+
+    <!-- Main Content -->
+    <div class="content">
+        {% for room_category,room_url in room_list%}
+        {% comment %} room=room_category,room_url {% endcomment %}
+        <div class="room">
+            <a href="{{room_url}}"> 
+                <img
+                    src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+
+                    <div class="room-info">
+                        <h2>{{ room_category }} Suite</h2>
+                        {% if room_category == 'AC' %}
+                            <p>Step into luxury with our AC Suite. Indulge in a cool and comfortable environment, perfect for unwinding after a day of exploration. With modern amenities and stylish décor, our AC Suite offers a serene retreat for your relaxation.</p>
+                            <div class="price-container">
+                                <span class="taka">Price:</span><br>
+                                <span class="price">&#2547; 32,925</span>
+                            </div>
+                        {% elif room_category == 'NON-AC' %}
+                            <p>Escape to tranquility with our Non-AC Suite. Embrace the warmth and coziness of our inviting accommodations, ideal for budget-conscious travelers seeking comfort and convenience during their stay.</p>
+                            <div class="price-container">
+                                <span class="taka">Price:</span><br>
+                                <span class="price">&#2547; 21,950</span>
+                            </div>
+                        {% elif room_category == 'DELUXE' %}
+                            <p>Experience opulence in our Deluxe Suite. Revel in the spaciousness and elegance of our premium accommodations, complete with luxurious furnishings and personalized services for a truly unforgettable stay.</p>
+                            <div class="price-container">
+                                <span class="taka">Price:</span><br>
+                                <span class="price">&#2547; 54,875</span>
+                            </div>
+                        {% elif room_category == 'KING' %}
+                            <p>Indulge in regal comfort with our King Suite. Treat yourself to the ultimate luxury experience with lavish amenities, expansive living spaces, and breathtaking views, fit for royalty.</p>
+                            <div class="price-container">
+                                <span class="taka">Price:</span><br>
+                                <span class="price">&#2547; 76,825</span>
+                            </div>
+                        {% elif room_category == 'QUEEN' %}
+                            <p>Discover sophistication in our Queen Suite. Immerse yourself in the charm of our stylishly appointed accommodations, offering a perfect blend of comfort and elegance for a memorable getaway.</p>
+                            <div class="price-container">
+                                <span class="taka">Price:</span><br>
+                                <span class="price">&#2547; 76,825</span>
+                            </div>
+                        {% endif %}
+                    </div>
+        </div>
+        {% endfor %}
+
+       
+
+    </div>
+    <script>
+        function goBack() {
+            var currentUrl = window.location.href;
+            var hotelId = extractHotelId(currentUrl);
+            var hotelDetailUrl = "/hotel_detail/" + hotelId + "/";
+            window.location.href = hotelDetailUrl;
+        }
+    
+        function extractHotelId(url) {
+            var regex = /\/hotel_detail\/(\d+)\//;
+            var match = url.match(regex);
+            if (match && match.length > 1) {
+                return match[1];
+            } else {
+                // Default hotel ID if no match is found
+                return 1; // You can set any default ID here
+            }
+        }
+    </script>
+    
+</body>
+
+</html>

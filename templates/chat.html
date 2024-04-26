@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/chat.css' %}"> <!-- Your custom CSS file for chat.html -->
+    <!-- Add your CSS links here -->
+    
+    <style>
+        /* Add your custom CSS styles here */
+
+        /* Style for the chat container */
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            height: 400px; /* Limit chat height */
+            overflow-y: auto; /* Enable scrolling */
+        }
+
+        /* Style for chat messages */
+        .message-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        /* Style for AI message box */
+        .ai-message-box {
+            background-color: #e5e5ea;
+            color: #000;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 80%;
+        }
+
+        /* Style for user message box */
+        .user-message-box {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 80%;
+            text-align: right;
+        }
+
+        /* Style for the user input form */
+        .user-input-form {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        /* Style for the input field */
+        .user-input-field {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        /* Style for the send button */
+        .send-button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Style for the send icon */
+        .send-icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Midnight Mirage</h2>
+        <div class="chat-container" id="chat-container">
+            <!-- AI greeting message will be appended here -->
+        </div>
+
+        <!-- User input form -->
+        <form id="user-input-form" class="user-input-form" action="{% url 'send_query_to_employee' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="user-query" name="user_query">
+            <input type="text" id="user-input" class="user-input-field" placeholder="Type your message here...">
+            <button type="submit" class="send-button">
+                <i class="send-icon">&#x27A4;</i> <!-- Send icon -->
+            </button>
+        </form>
+    </div>
+
+    <footer class="fixed-bottom">
+        <p>&copy; Midnight Mirage</p>
+    </footer>
+
+    <script>
+        // JavaScript for handling chat functionality
+        const chatContainer = document.getElementById('chat-container');
+        const userForm = document.getElementById('user-input-form');
+        const userInput = document.getElementById('user-input');
+        const userQueryField = document.getElementById('user-query');
+
+        // Greeting message based on current time
+        const currentDate = new Date();
+        const currentHour = currentDate.getHours();
+        let greeting = '';
+        if (currentHour >= 5 && currentHour < 12) {
+            greeting = 'Good morning! How may I help you?';
+        } else if (currentHour >= 12 && currentHour < 18) {
+            greeting = 'Good afternoon!How may I help you?';
+        } else {
+            greeting = 'Good evening!How may I help you?';
+        }
+        appendMessage(greeting, 'ai');
+
+        userForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userMessage = userInput.value.trim();
+            if (userMessage !== '') {
+                appendMessage(userMessage, 'user');
+                userQueryField.value = userMessage; // Set the value of the hidden input field to user's query
+                userInput.value = '';
+                simulateAIResponse(userMessage);
+                // Submit the form after simulating AI response
+                setTimeout(() => userForm.submit(), 1000);
+            }
+        });
+
+        function appendMessage(message, sender) {
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('message-container');
+            const messageBox = document.createElement('div');
+            messageBox.classList.add(sender === 'user' ? 'user-message-box' : 'ai-message-box');
+            messageBox.innerText = message;
+            messageContainer.appendChild(messageBox);
+            chatContainer.appendChild(messageContainer);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function simulateAIResponse(userMessage) {
+            // Simulate AI response
+            setTimeout(function() {
+                appendMessage('AI response to: ' + userMessage, 'ai');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

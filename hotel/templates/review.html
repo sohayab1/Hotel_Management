@@ -1,0 +1,196 @@
+<!-- templates/hotel/review.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/review.css' %}">
+    <style>
+        /* Set background image */
+        body {
+            background-image: url('/static/image/jVo.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Style for the review form container */
+        .review-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); /* Add shadow for better visibility */
+            margin-top: 20vh; /* Adjust the distance from the top */
+        }
+
+        /* Style for the review form heading */
+        .review-form-heading {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the review form fields */
+        .review-form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .review-form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style for the star rating */
+        .star-rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            display: inline-block;
+            font-size: 0;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 30px;
+            color: #ccc;
+            float: right;
+            padding: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .star-rating label:before {
+            content: '★';
+        }
+
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #ffcc00;
+        }
+        .star-rating input[type="radio"]:not(:checked) ~ label:hover,
+        .star-rating input[type="radio"]:not(:checked) ~ label:hover ~ label {
+        color: #ffcc00; /* Highlight stars on hover */
+       }
+       .star-rating label.half:before {
+        content: '★'; /* Unicode character for half star */
+        position: absolute;
+        margin-left: -10px; /* Adjust the position */
+        color:transparent; /* Color for half star */
+        
+        width: 0;
+    }
+    
+    /* Slide effect for half stars */
+    .star-rating input[type="radio"]:not(:checked) ~ label.half:hover:before,
+    .star-rating input[type="radio"]:not(:checked) ~ label.half:hover ~ label:before {
+        color: red; /* Color for half star */
+        width: 50%; /* Make the half star visible */
+    }
+
+
+        /* Style for the submit button */
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-right: 300px;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            background-color: #de718c; /* Set background color for back button */
+            color: #fff; /* Set text color for back button */
+            padding: 10px 20px; /* Add padding to back button */
+            border: none; /* Remove border from back button */
+            border-radius: 5px; /* Add border radius to back button */
+            cursor: pointer; /* Set cursor style for back button */
+            text-decoration: none; /* Remove underline from back button */
+            display: inline-block; /* Display back button as inline-block */
+            margin-top: 10px; /* Add top margin to back button */
+        }
+
+
+        .back-button:hover {
+            background-color: #ff69b4; /* Lighter shade of pink on hover */
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            // Handle star rating
+            $('.star-rating input').on('change', function() {
+                var value = $(this).val();
+                var container = $(this).closest('.star-rating');
+                container.find('label').removeClass('half');
+                var isHalf = value % 1 !== 0;
+                if (isHalf) {
+                    container.find('input[value="' + Math.floor(value) + '"]').next('label').addClass('half');
+                }
+            });
+    
+            // Highlight stars on hover
+            $('.star-rating label').hover(function() {
+                var index = $(this).index() + 1;
+                $(this).closest('.star-rating').find('label:lt(' + index + ')').addClass('hover');
+            }, function() {
+                $(this).closest('.star-rating').find('label').removeClass('hover');
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <div class="review-form-container">
+        <h1 class="review-form-heading">Submit Your Review</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="review-form-field">
+                <label for="comment" class="review-form-label">Comment:</label>
+                <textarea id="comment" name="comment" class="review-form-input" required></textarea>
+            </div>
+            <div class="review-form-field">
+                <label for="rating" class="review-form-label">Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                    <!-- Half-star option -->
+                    <input type="radio" id="star0.5" name="rating" value="0.5">
+                    <label class="half" for="star0.5"></label>
+                </div>
+            </div>
+            <button type="submit" class="submit-button">Submit Review</button>
+            <button type="button" class="back-button" onclick="goBack()">Back</button>
+        </form>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles for the home page link */
+        .home-link {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            z-index: 999; /* Ensure it's above other content */
+        }
+
+        .home-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-link a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Rest of your styles */
+        .reviews-container {
+            text-align: center; /* Align center horizontally */
+            margin-top: 50px; /* Add top margin for spacing */
+            background-image: url('/static/image/riviewde.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Ensure the background image remains fixed */
+            padding: 50px; /* Add padding for content */
+            color: rgba(255, 255, 255, 0.9);  /* Add top margin for spacing */
+        }
+        h1 {
+            color: #000;
+            font-size: bold 34px; /* Set "Reviews" text color to black */
+        }
+
+        .review-box {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: left;
+            clear: both;
+            width: 100%;
+        }
+        .review-box p {
+            font-size: 24px;
+            color: black; /* Increase font size of review comments */
+        }
+        .rating {
+            font-size: 34px;
+        }
+
+        .star {
+            color: #f39c12;
+            font-size: 34px;
+            cursor: pointer;
+        }
+
+        .star:hover,
+        .star:hover ~ .star {
+            color: #f39c12;
+        }
+
+        .star.active {
+            color: #f39c12;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            z-index: 999; /* Ensure it's above other content */
+            display: none;
+        }
+
+        .back-to-top a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top a:hover {
+            background-color: #0056b3;
+        }
+        .review-box .rating-label {
+            font-size: 28px;
+            color: black; /* Increase font size of the "Rating" text */
+        }
+        
+      
+    </style>
+</head>
+<body>
+    <div class="home-link">
+        <a href="/" class="login-link">Home</a>
+    </div>
+    <div class="reviews-container">
+    <h1>Reviews</h1>
+    <div class="reviews">
+        {% for review in reviews reversed %}
+        <div class="review-box">
+       
+            <div class="rating" data-rating="{{ review.rating }}"></div>
+            <p>Messages: {{ review.comment }}</p>
+            <div class="rating-stars" data-rating="{{ review.rating }}"></div>
+            {% if review.rating  == 5 %}
+            <span class="rating-label">Rating : <span class="star">★★★★★</span></span>
+            {% elif review.rating  == 4 %}
+            <span class="rating-label">Rating : <span class="star">★★★★</span></span>
+            {% elif review.rating  == 3 %}
+            <span class="rating-label"> Rating : <span class="star">★★★</span></span>
+            {% elif review.rating  == 2 %}
+            <span class="rating-label"> Rating : <span class="star">★★</span></span>
+            {% elif review.rating  == 1 %}
+            <span class="rating-label"> Rating : <span class="star">★</span></span>
+            {% endif %}
+            
+        </div>
+        {% empty %}
+        <p>No reviews available.</p>
+        {% endfor %}
+    </div>
+    <div class="back-to-top" id="back-to-top">
+        <a href="#">❄️</a>
+    </div>
+    <script src="stars.js"></script>
+    <script>
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("back-to-top").style.display = "block";
+            } else {
+                document.getElementById("back-to-top").style.display = "none";
+            }
+        }
+
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
+    </script>
+</body>
+</html>

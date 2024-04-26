@@ -1,0 +1,524 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="{% static 'payment/css/payment.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Payment Option and Room Type</h1>
+        
+        <form method="POST" action="{% url 'process_payment' %}">
+            {% csrf_token %}
+
+            <label for="name">Guest Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <small id="namePrompt" style="display: none; color: red;">Please type the name of the guest.</small><br><br>
+
+            
+            <label for="payment_option">Select Payment Option:</label><br>
+            <select id="payment_option" name="payment_option">
+                <option value="empty">-----</option>
+                <option value="bkash">Bkash</option>
+                <option value="rocket">Rocket</option>
+                <option value="mastercard">Mastercard</option>
+            </select><br><br>
+            
+            
+            <label for="currency">Select Currency:</label><br>
+            <select id="currency" name="currency">
+                <option value="empty">-----</option>
+                <option value="taka">Taka</option>
+                <option value="rupee">Rupee</option>
+                <option value="dollar">Dollar</option>
+            </select><br><br>
+
+          
+            <label for="promo_code">Promo Code:</label><br>
+            <input type="text" id="promo_code" name="promo_code"><br><br>
+
+           
+            
+            <label for="room_type">Select Room Type:</label><br>
+            <select id="room_type" name="room_type">
+                <option value="empty">-----</option>
+                <option value="NAC">Non AC</option>
+                <option value="YAC">AC</option>
+                <option value="DEL">Deluxe</option>
+                <option value="KIN">King</option>
+                <option value="QUE">Queen</option>
+            </select><br><br>
+           
+
+
+            
+            <div id="payment_details">
+             
+            </div>
+            
+            <label for="amount">Amount:</label><br>
+            <input type="text" id="amount" name="amount" readonly><br><br>
+            
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </div>
+    
+    
+    <script>
+        
+        document.getElementById('payment_option').addEventListener('change', function() {
+            var paymentOption = this.value;
+            var paymentDetails = document.getElementById('payment_details');
+            
+         
+            paymentDetails.innerHTML = '';
+         
+            paymentDetails.style.display = 'none';
+            
+      
+            if (paymentOption === 'bkash' || paymentOption === 'rocket') {
+              
+                paymentDetails.innerHTML = '<label for="phone_number">Phone Number:</label><br>' +
+                                           '<input type="text" id="phone_number" name="phone_number" required><br><br>';
+                paymentDetails.style.display = 'block';
+            } else if (paymentOption === 'mastercard') {
+            
+                paymentDetails.innerHTML = '<label for="card_number">Card Number:</label><br>' +
+                                           '<input type="text" id="card_number" name="card_number" required><br><br>' +
+                                           '<label for="expiry_date">Expiry Date:</label><br>' +
+                                           '<input type="date" id="expiry_date" name="expiry_date" required><br><br>' +
+                                           '<label for="cvv">CVV:</label><br>' +
+                                           '<input type="text" id="cvv" name="cvv" pattern="[0-9]*" maxlength="3" required><br><br>';
+                paymentDetails.style.display = 'block';
+            }
+        });
+        
+        
+        
+     
+        document.getElementById('room_type').addEventListener('change', function() {
+            var roomType = this.value;
+            var currency = document.getElementById('currency').value;
+            var amountField = document.getElementById('amount');
+            var roomPrice = 0;
+            
+          
+            if (roomType === 'NAC') {
+                roomPrice = 200;
+            } else if (roomType === 'YAC') {
+                roomPrice = 300;
+            } else if (roomType === 'DEL') {
+                roomPrice = 500;
+            } else if (roomType === 'KIN' || roomType === 'QUE') {
+                roomPrice = 700;
+            }
+            
+           
+            if (currency === 'taka') {
+                roomPrice *= 109.75; 
+            } else if (currency === 'rupee') {
+                roomPrice *= 83.33; 
+            } else if (currency === 'dollar') {
+                roomPrice *= 1;
+            }
+            
+       
+            var promoCode = document.getElementById('promo_code').value;
+            if (promoCode === 'love14') {
+                roomPrice *= (100 - 14) / 100; 
+            } else if (promoCode === 'feb21') {
+                roomPrice *= (100 - 21) / 100; 
+            } else if (promoCode === 'mar26') {
+                roomPrice *= (100 - 26) / 100; 
+            } else if (promoCode === 'baisakh14') {
+                roomPrice *= (100 - 14) / 100; 
+            }
+            
+            
+            amountField.value = roomPrice.toFixed(2); 
+        });
+        document.getElementById('name').addEventListener('input', function() {
+            var nameInput = this.value.trim();
+            var namePrompt = document.getElementById('namePrompt');
+            
+            if (nameInput === '') {
+                namePrompt.style.display = 'block';
+            } else {
+                namePrompt.style.display = 'none';
+            }
+        });
+        
+    </script>
+</body>
+</html>
+
+
+
+ {% endcomment %}
+
+
+ {% comment %} ----------------------------------- {% endcomment %}
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="{% static 'payment/css/payment.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-hax5JLeC8rtPBavJHnWf/vCZtb5F0yOsBYMzzdQJ5r73iEq/Xu0fkwJwFJ6lXcgj" crossorigin="anonymous">
+
+
+    <style>
+        .payment-select {
+            width: 200px;
+            height: 40px;
+            /* Add additional styles as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Payment Option and Room Type</h1>
+        
+        
+        
+<form method="POST" action="{% url 'process_payment' %}" id="payment_form">
+    {% csrf_token %}
+    
+    <label for="hotel_name">Hotel Name:  </label>
+    <input type="text" id="hotel_name" name="hotel_name" value="{{ hotel_name }}" readonly>
+
+    <label for="name">Guest Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <small id="namePrompt" style="display: none; color: red;">Please type the name of the guest.</small><br><br>
+
+    <label for="check_in">Check-in</label><br>
+    <input type="date" id="check_in" name="check_in" min="{{ today_date }}" required><br><br>
+
+    <label for="check_out">Check-out</label><br>
+    <input type="date" id="check_out" name="check_out" required><br><br> 
+
+    <label for="payment_option">Select Payment Option:</label><br>
+<select id="payment_option" name="payment_option" class="payment-select">
+    <option value="empty">-----</option>
+    <option value="cash" data-image="{%static 'payment/360_F_449229860_uczw7ZS0sw6Ou31yhifld9s0KHkdULcR.jpg'%}">Cash</option>
+    <option value="bkash" data-image="{% static 'payment/1656235199bkash-logo-transparent.jpg' %}" > Bkash</option>
+    <option value="rocket" data-image="{% static 'payment/dutch-bangla-rocket-logo-B4D1CC458D-seeklogo.com.png' %}" > Rocket</option>
+    <option value="mastercard" data-image="{% static 'payment/Mastercard_logo.0.jpg' %}" > Mastercard</option>
+</select><br><br>
+
+
+
+
+    <label for="currency">Select Currency:</label><br>
+    <select id="currency" name="currency">
+        <option value="empty">-----</option>
+        <option value="taka">BDT &#2547;</option>
+        <option value="rupee">INR &#8377;</option>
+        <option value="dollar">Dollar &#36;</option>
+    </select><br><br>
+>
+
+    <!-- Promo box -->
+    <label for="promo_code">Promo Code:</label><br>
+    <input type="text" id="promo_code" name="promo_code"><br><br>
+
+    <!-- Number of rooms -->
+    <label for="num_rooms">Number of Rooms:</label><br>
+    <input type="number" id="num_rooms" name="num_rooms" min="1" value="1"><br><br>
+
+    <label for="room_type">Select Room:</label><br>
+<select id="room_type" name="room_type">
+    <option value="empty">-----</option>
+    <option value="NAC" {% if selected_room_type == 'NAC' %}selected{% endif %}>Non AC</option>
+    <option value="YAC" {% if selected_room_type == 'YAC' %}selected{% endif %}>AC</option>
+    <option value="DEL" {% if selected_room_type == 'DEL' %}selected{% endif %}>Deluxe</option>
+    <option value="KIN" {% if selected_room_type == 'KIN' %}selected{% endif %}>King</option>
+    <option value="QUE" {% if selected_room_type == 'QUE' %}selected{% endif %}>Queen</option>
+</select><br><br>
+
+    
+
+    <div id="payment_details">
+        <!-- Input fields for phone number or card details -->
+    </div>
+
+    <label for="amount">Amount:</label><br>
+    <input type="text" id="amount" name="amount" readonly><br><br>
+    <input type="hidden" name="payment_option_image" value="{{ payment_option_image }}">
+    
+
+    <button type="submit" onclick="clicked(event)">Proceed to Payment</button>
+</form>
+
+<script>
+    // Get today's date in the format required for the min attribute of the date input
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var today_date = yyyy + '-' + mm + '-' + dd;
+
+    // Set the minimum date for check-out to be the same as check-in
+    document.getElementById("check_in").addEventListener("change", function() {
+        document.getElementById("check_out").min = this.value;
+    });
+
+    // Set today's date as the minimum date for check-in
+    document.getElementById("check_in").setAttribute("min", today_date);
+</script>
+
+</div>
+
+
+<script>
+// JavaScript to show additional payment details fields based on payment option
+document.getElementById('payment_option').addEventListener('change', function() {
+    var paymentOption = this.value;
+    var paymentDetails = document.getElementById('payment_details');
+    
+    // Clear any existing content
+    paymentDetails.innerHTML = '';
+    
+    // Hide payment details initially
+    paymentDetails.style.display = 'none';
+    
+    // Show payment details fields based on payment option
+    if (paymentOption === 'bkash' || paymentOption === 'rocket') {
+        // If Bkash or Rocket is selected, show input field for phone number
+        paymentDetails.innerHTML = '<label for="phone_number">Phone Number:</label><br>' +
+                                   '<input type="text" id="phone_number" name="phone_number" required><br><br>';
+                                   ' <small id="phone_number_error" style="display: none; color: red;">Please enter a valid 11-digit phone number.</small><br><br>',
+                                   '<div id="error_message"></div>'
+                                   document.getElementById('phone_number').addEventListener('input', validatePhoneNumber);                           
+        paymentDetails.style.display = 'block';
+    } else if (paymentOption === 'mastercard') {
+        // If Mastercard is selected, show input fields for card details
+        paymentDetails.innerHTML = '<label for="card_number">Card Number:</label><br>' +
+                                   '<input type="text" id="card_number" name="card_number" required><br><br>' +
+                                   '<label for="expiry_date">Expiry Date:</label><br>' +
+                                   '<input type="date" id="expiry_date" name="expiry_date" required><br><br>' +
+                                   '<label for="cvv">CVV:</label><br>' +
+                                   '<input type="text" id="cvv" name="cvv" pattern="[0-9]*" maxlength="3" required><br><br>';
+        paymentDetails.style.display = 'block';
+    }
+});
+function validatePhoneNumber() {
+    var phoneNumberInput = document.getElementById('phone_number');
+    var phoneNumber = phoneNumberInput.value.trim();
+
+    // Regular expression to match exactly 11 digits
+    var phoneRegex = /^\d{11}$/;
+
+    // Validate phone number format
+    if (!phoneRegex.test(phoneNumber)) {
+        displayError('Phone number must be 11 digits long.');
+    } else {
+        clearError();
+    }
+}
+
+function displayError(message) {
+    var errorContainer = document.getElementById('error_message');
+    errorContainer.innerHTML = message;
+    errorContainer.style.color = 'red';
+}
+
+function clearError() {
+    var errorContainer = document.getElementById('error_message');
+    errorContainer.innerHTML = '';
+}
+// JavaScript to calculate amount based on room type selection, currency conversion, promo code, number of rooms, check-in, and check-out dates
+document.getElementById('room_type').addEventListener('change', function() {
+    calculateAmount();
+    
+});
+
+document.getElementById('currency').addEventListener('change', function() {
+    calculateAmount();
+});
+
+document.getElementById('promo_code').addEventListener('input', function() {
+    calculateAmount();
+});
+
+document.getElementById('num_rooms').addEventListener('input', function() {
+    calculateAmount();
+});
+
+document.getElementById('check_in').addEventListener('change', function() {
+    calculateAmount();
+});
+
+document.getElementById('check_out').addEventListener('change', function() {
+    calculateAmount();
+});
+
+function calculateAmount() {
+    var room_type = document.getElementById('room_type').value;
+    var currency = document.getElementById('currency').value;
+    var amountField = document.getElementById('amount');
+    var roomPrice = 0;
+   
+
+    // Set room price based on room type
+    if (room_type === 'NAC') {
+        roomPrice = 200;
+    } else if (room_type === 'YAC') {
+        roomPrice = 300;
+    } else if (room_type === 'DEL') {
+        roomPrice = 500;
+    } else if (room_type === 'KIN' || room_type === 'QUE') {
+        roomPrice = 700;
+    }
+
+    // Convert room price based on currency
+    if (currency === 'taka') {
+        roomPrice *= 109.75; // 1 dollar = 109.75 Taka
+    } else if (currency === 'rupee') {
+        roomPrice *= 83.33; // 1 dollar = 83.33 Rupee
+    } else if (currency === 'dollar') {
+        roomPrice *= 1; // Already in dollar
+    }
+
+    // Apply discount based on promo code
+    var promoCode = document.getElementById('promo_code').value;
+    if (promoCode === 'love14') {
+        roomPrice *= (100 - 14) / 100; // 14% discount for valentine14 promo code
+    } else if (promoCode === 'feb21') {
+        roomPrice *= (100 - 21) / 100; // 21% discount for february21 promo code
+    } else if (promoCode === 'mar26') {
+        roomPrice *= (100 - 26) / 100; // 26% discount for march26 promo code
+    } else if (promoCode === 'baisakh14') {
+        roomPrice *= (100 - 14) / 100; // 14% discount for baisakh14 promo code
+    }
+
+    // Get the number of rooms
+    var numRooms = parseInt(document.getElementById('num_rooms').value);
+    
+    //Calculate duration of stay in hours
+    var checkInDate = new Date(document.getElementById('check_in').value);
+    var checkOutDate = new Date(document.getElementById('check_out').value);
+    var durationInHours = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60));
+
+    durationInHours = Math.max(durationInHours, 24);
+
+    
+    roomPrice *= durationInHours / 24;
+
+    // Calculate total amount
+    var totalAmount = roomPrice * numRooms;
+
+    // Set the calculated amount in the amount field
+    amountField.value = totalAmount.toFixed(2); // Limit to 2 decimal places
+}
+
+// JavaScript to show/hide name prompt based on input
+document.getElementById('name').addEventListener('input', function() {
+    var nameInput = this.value.trim();
+    var namePrompt = document.getElementById('namePrompt');
+    
+    if (nameInput === '') {
+        namePrompt.style.display = 'block';
+    } else {
+        namePrompt.style.display = 'none';
+    }
+});
+</script>
+<script>
+// JavaScript to show images for select payment options
+document.getElementById('payment_option').addEventListener('change', function() {
+    var paymentOption = this.value;
+    var paymentSelect = this;
+
+    // Get the selected option
+    var selectedOption = paymentSelect.options[paymentSelect.selectedIndex];
+
+    // Get the path to the image from the data-image attribute
+    var imageUrl = selectedOption.getAttribute('data-image');
+
+    // Set the background image of the select box to the selected image
+    paymentSelect.style.backgroundImage = "url('" + imageUrl + "')";
+    paymentSelect.style.backgroundRepeat = "no-repeat";
+    paymentSelect.style.backgroundPosition = "right center";
+    paymentSelect.style.backgroundSize = "contain";
+});
+
+// Set initial background image for the select box
+document.getElementById('payment_option').dispatchEvent(new Event('change'));
+
+</script>
+<script>
+    document.getElementById('currency').addEventListener('change', function() {
+        const currencyIcon = document.getElementById('currency-icon');
+        const selectedCurrency = this.value;
+        switch (selectedCurrency) {
+            case 'taka':
+                currencyIcon.innerHTML = '&#2547;';
+                break;
+            case 'rupee':
+                currencyIcon.innerHTML = '&#8377;';
+                break;
+            case 'dollar':
+                currencyIcon.innerHTML = '&#36;';
+                break;
+            default:
+                currencyIcon.innerHTML = '';
+        }
+    });
+</script>
+ <script>
+        // JavaScript to pre-fill the room type dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectedRoomType = "{{ selected_room_type }}";
+            var roomTypeDropdown = document.getElementById('room_type');
+
+            // Find the option with the selected room type and mark it as selected
+            for (var i = 0; i < roomTypeDropdown.options.length; i++) {
+                if (roomTypeDropdown.options[i].value === selectedRoomType) {
+                    roomTypeDropdown.options[i].selected = true;
+                    break;
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var hotelId = '{{ hotel_id }}';  // Fetch hotel_id from template context
+            var hotelNameLabel = document.getElementById('hotel_name_label');
+            
+            // Fetch hotel name using AJAX
+            if (hotelId) {
+                fetch(`/get_hotel_name?id=${hotelId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.name) {
+                            hotelNameLabel.innerText = data.name;
+                        } else {
+                            hotelNameLabel.innerText = 'Hotel Name Not Found';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching hotel name:', error);
+                        hotelNameLabel.innerText = 'Error fetching hotel name';
+                    });
+            } else {
+                hotelNameLabel.innerText = 'Invalid hotel ID';
+            }
+        });
+    </script>
+    
+   
+
+
+</body>
+</html>
